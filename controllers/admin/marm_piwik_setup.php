@@ -71,7 +71,8 @@ class marm_piwik_setup extends oxAdminDetails
      */
     public function save()
     {
-        $aParams = oxConfig::getParameter( "editval" );
+        $oConfig = oxRegistry::getConfig();
+        $aParams = $oConfig->getRequestParameter( "editval" );
         $oMarmPiwik = $this->getMarmPiwik();
         $oMarmPiwik->changeConfig($aParams);
     }
