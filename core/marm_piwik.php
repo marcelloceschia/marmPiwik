@@ -256,7 +256,7 @@ class marm_piwik {
         $cntResults = $oViewObject->isEmptySearch() ? 0 : $oViewObject->getArticleCount();
 	$this->addPushParams(
 	    'trackSiteSearch',
-	    $oViewObject->getSearchParam(),
+	    urldecode($oViewObject->getSearchParam()),
 	    false,
 	    $cntResults
 	);
