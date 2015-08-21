@@ -96,7 +96,7 @@ class marm_piwik {
 
     protected function _loadConfig()
     {
-        $aSavedConfig = oxConfig::getInstance()->getShopConfVar(self::CONFIG_ENTRY_NAME);
+        $aSavedConfig = oxRegistry::getConfig()->getShopConfVar(self::CONFIG_ENTRY_NAME);
         if ($aSavedConfig && count($aSavedConfig) == count($this->_aConfig)) {
             $this->_aConfig = $aSavedConfig;
         }
@@ -108,7 +108,7 @@ class marm_piwik {
 
     protected function _saveConfig()
     {
-        oxConfig::getInstance()->saveShopConfVar( 'arr', self::CONFIG_ENTRY_NAME, $this->_aConfig );
+        oxRegistry::getConfig()->saveShopConfVar( 'arr', self::CONFIG_ENTRY_NAME, $this->_aConfig );
     }
 
     public function getConfig()
@@ -190,7 +190,7 @@ class marm_piwik {
      */
     protected function _getViewOrder()
     {
-        return oxConfig::getInstance()->getActiveView();
+        return oxRegistry::getConfig()->getActiveView();
     }
 
     /**
@@ -254,12 +254,12 @@ class marm_piwik {
     public function setPiwikParamsForSearch($oViewObject)
     {
         $cntResults = $oViewObject->isEmptySearch() ? 0 : $oViewObject->getArticleCount();
-	$this->addPushParams(
-	    'trackSiteSearch',
-	    urldecode($oViewObject->getSearchParam()),
-	    false,
-	    $cntResults
-	);
+    	$this->addPushParams(
+    	    'trackSiteSearch',
+    	    urldecode($oViewObject->getSearchParam()),
+    	    false,
+    	    $cntResults
+    	);
     }
 
     /**
@@ -327,7 +327,7 @@ class marm_piwik {
          * may NOT have getBasket method (for example Details)
          * @var oxBasket $oBasket
          */
-        $oBasket = oxSession::getInstance()->getBasket();
+        $oBasket = oxRegistry::getSession()->getBasket();
         $this->_setEcommerceItemsByBasket($oBasket);
         $this->addPushParams('trackEcommerceCartUpdate', $oBasket->getPrice()->getBruttoPrice());
     }
