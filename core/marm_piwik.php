@@ -254,12 +254,12 @@ class marm_piwik {
     public function setPiwikParamsForSearch($oViewObject)
     {
         $cntResults = $oViewObject->isEmptySearch() ? 0 : $oViewObject->getArticleCount();
-        $this->addPushParams(
-            'trackSiteSearch',
-            $oViewObject->getSearchParam(),
-            false,
-            $cntResults
-        );
+    	$this->addPushParams(
+    	    'trackSiteSearch',
+    	    urldecode($oViewObject->getSearchParam()),
+    	    false,
+    	    $cntResults
+    	);
     }
 
     /**
